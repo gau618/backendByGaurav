@@ -17,4 +17,5 @@ class ApiError extends Error{
             Error.captureStackTrace(this,this.constructor)}
     }
 }
+console.log(Error);
 export {ApiError}
