@@ -11,6 +11,11 @@ const usersScheme=new mongoose.Schema(
         trim:true,
         index:true
       },
+      password:{
+        type:String,
+        required:true,
+        trim:true,
+      },
       email:{
         type:String,
         required:true,
@@ -39,7 +44,6 @@ const usersScheme=new mongoose.Schema(
       ],
       refreshToken:{
         type:String,
-        required:true,
       }
     },
     {
@@ -58,7 +62,7 @@ usersScheme.methods.isPasswordCorrect=async function(password){
 }
 usersScheme.methods.generateRefreshToken= async function(){
   return await jwt.sign({
-    id:this._id,
+    _id:this._id,
     username:this.username,
     email:this.email,
     fullName:this.fullName
@@ -67,7 +71,7 @@ usersScheme.methods.generateRefreshToken= async function(){
 usersScheme.methods.generateAccessToken= async function(
 ){
  return await jwt.sign({
-    id:this._id,
+    _id:this._id,
     username:this.username,
     email:this.email,
     fullName:this.fullName
